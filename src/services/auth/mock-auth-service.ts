@@ -17,7 +17,7 @@ const mockUsers = [
     role: "user",
     preferences: {
       notifications: true,
-      theme: "dark"
+      theme: "dark" as const
     },
     households: [1, 2]
   }

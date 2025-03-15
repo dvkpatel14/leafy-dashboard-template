@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/app-layout";
 import { Section } from "@/components/ui/section";
 import { MetricCard } from "@/components/ui/metric-card";
@@ -92,8 +91,7 @@ export default function Dashboard() {
                 icon={metric.icon}
                 description={metric.description}
                 trend={metric.trend}
-                className="animate-fade-in"
-                style={{ animationDelay: `${i * 100}ms` }}
+                className={`animate-fade-in delay-${i * 100}`}
               />
             ))}
           </div>

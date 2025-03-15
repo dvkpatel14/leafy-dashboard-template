@@ -2,8 +2,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
+import { HTMLAttributes } from "react";
 
-interface MetricCardProps {
+interface MetricCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   value: string | number;
   icon?: LucideIcon;
@@ -22,9 +23,10 @@ export function MetricCard({
   description,
   trend,
   className,
+  ...props
 }: MetricCardProps) {
   return (
-    <Card className={cn("overflow-hidden", className)}>
+    <Card className={cn("overflow-hidden", className)} {...props}>
       <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {Icon && <Icon className="h-4 w-4 text-muted-foreground" />}
