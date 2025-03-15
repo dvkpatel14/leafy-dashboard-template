@@ -21,6 +21,17 @@ const mockUsers = [
       theme: "dark" as "dark" | "light"
     },
     households: [1, 2]
+  },
+  {
+    email: "testuser@gmail.com",
+    password: "Qawsed11",
+    userId: 2,
+    role: "user",
+    preferences: {
+      notifications: true,
+      theme: "light" as "dark" | "light"
+    },
+    households: [3]
   }
 ];
 
