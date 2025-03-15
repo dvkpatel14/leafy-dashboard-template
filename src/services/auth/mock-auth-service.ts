@@ -4,7 +4,8 @@ import {
   LoginResponse, 
   RegisterRequest, 
   User, 
-  UpdateProfileRequest 
+  UpdateProfileRequest,
+  UserPreferences
 } from "@/types/auth";
 import { toast } from "sonner";
 
@@ -71,8 +72,11 @@ export class MockAuthService {
       password: request.password,
       userId: mockUsers.length + 1,
       role: "user",
-      preferences: request.preferences,
-      households: []
+      preferences: {
+        notifications: request.preferences.notifications,
+        theme: request.preferences.theme
+      },
+      households: [] as number[]
     };
     
     mockUsers.push(newUser);
@@ -98,7 +102,10 @@ export class MockAuthService {
     return {
       email: user.email,
       role: user.role,
-      preferences: user.preferences,
+      preferences: {
+        notifications: user.preferences.notifications,
+        theme: user.preferences.theme
+      },
       households: user.households
     };
   }
@@ -117,7 +124,10 @@ export class MockAuthService {
     
     // Update user details
     if (updates.preferences) {
-      user.preferences = { ...user.preferences, ...updates.preferences };
+      user.preferences = { 
+        ...user.preferences, 
+        ...updates.preferences 
+      };
     }
     
     if (updates.password) {
@@ -129,7 +139,10 @@ export class MockAuthService {
     return {
       email: user.email,
       role: user.role,
-      preferences: user.preferences,
+      preferences: {
+        notifications: user.preferences.notifications,
+        theme: user.preferences.theme
+      },
       households: user.households
     };
   }
