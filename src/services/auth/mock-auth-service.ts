@@ -18,7 +18,7 @@ const mockUsers = [
     role: "user",
     preferences: {
       notifications: true,
-      theme: "dark" as const
+      theme: "dark" as "dark" | "light"
     },
     households: [1, 2]
   }
@@ -124,9 +124,9 @@ export class MockAuthService {
     
     // Update user details
     if (updates.preferences) {
-      user.preferences = { 
-        ...user.preferences, 
-        ...updates.preferences 
+      user.preferences = {
+        ...user.preferences,
+        ...updates.preferences
       };
     }
     
