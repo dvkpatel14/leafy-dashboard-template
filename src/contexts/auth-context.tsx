@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User, LoginRequest, RegisterRequest, UpdateProfileRequest } from "@/types/auth";
-import { getAuthService } from "@/services/service-factory";
+import { getServices } from "@/services/service-factory";
 import { toast } from "sonner";
 
 interface AuthContextType {
@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const authService = getAuthService();
+  const authService = getServices().auth;
 
   // Load user on initial render
   useEffect(() => {

@@ -5,7 +5,8 @@ import {
   RegisterRequest, 
   User, 
   UpdateProfileRequest,
-  UserPreferences
+  UserPreferences,
+  AuthService
 } from "@/types/auth";
 import { toast } from "sonner";
 
@@ -38,7 +39,7 @@ const mockUsers = [
 // Mock localStorage key
 const AUTH_TOKEN_KEY = "leaf-auth-token";
 
-export class MockAuthService {
+export class MockAuthService implements AuthService {
   private delayMs = 800; // Simulate network delay
 
   // Helper to simulate API delay

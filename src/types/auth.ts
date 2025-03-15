@@ -1,7 +1,6 @@
-
 export interface UserPreferences {
   notifications: boolean;
-  theme: "light" | "dark";
+  theme: "dark" | "light";
 }
 
 export interface User {
@@ -29,6 +28,15 @@ export interface RegisterRequest {
 }
 
 export interface UpdateProfileRequest {
-  preferences?: UserPreferences;
   password?: string;
+  preferences?: Partial<UserPreferences>;
+}
+
+export interface AuthService {
+  login(credentials: LoginRequest): Promise<LoginResponse>;
+  register(request: RegisterRequest): Promise<void>;
+  getCurrentUser(): Promise<User | null>;
+  updateProfile(updates: UpdateProfileRequest): Promise<User>;
+  logout(): Promise<void>;
+  isAuthenticated(): boolean;
 }
