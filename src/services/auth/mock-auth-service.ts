@@ -74,7 +74,7 @@ export class MockAuthService {
       role: "user",
       preferences: {
         notifications: request.preferences.notifications,
-        theme: request.preferences.theme
+        theme: request.preferences.theme as "light" | "dark"
       },
       households: [] as number[]
     };
@@ -104,7 +104,7 @@ export class MockAuthService {
       role: user.role,
       preferences: {
         notifications: user.preferences.notifications,
-        theme: user.preferences.theme
+        theme: user.preferences.theme as "light" | "dark"
       },
       households: user.households
     };
@@ -127,7 +127,7 @@ export class MockAuthService {
       user.preferences = { 
         ...user.preferences, 
         ...updates.preferences 
-      };
+      } as { notifications: boolean; theme: "light" | "dark" };
     }
     
     if (updates.password) {
@@ -141,7 +141,7 @@ export class MockAuthService {
       role: user.role,
       preferences: {
         notifications: user.preferences.notifications,
-        theme: user.preferences.theme
+        theme: user.preferences.theme as "light" | "dark"
       },
       households: user.households
     };
