@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -23,7 +22,6 @@ const registerSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   confirmPassword: z.string().min(8, "Password must be at least 8 characters"),
-  notifications: z.boolean().default(true),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
@@ -42,7 +40,6 @@ export default function Register() {
       email: "",
       password: "",
       confirmPassword: "",
-      notifications: true,
     },
   });
   
@@ -53,14 +50,16 @@ export default function Register() {
         email: values.email,
         password: values.password,
         preferences: {
-          notifications: values.notifications,
+          notifications: false, // Setting default to false since we removed the checkbox
           theme: "light",
         },
       });
-      toast.success("Account created successfully! Please log in.");
-      navigate("/login");
+      toast.success("Account created successfully!");
+      // Redirect user to dashboard instead of login page
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
+      toast.error("Failed to create account. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -118,25 +117,6 @@ export default function Register() {
                       <Input type="password" placeholder="••••••••" {...field} />
                     </FormControl>
                     <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="notifications"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>
-                        Send me notifications
-                      </FormLabel>
-                    </div>
                   </FormItem>
                 )}
               />

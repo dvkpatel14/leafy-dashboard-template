@@ -1,4 +1,3 @@
-
 import { 
   LoginRequest, 
   LoginResponse, 
@@ -92,7 +91,16 @@ export class MockAuthService implements AuthService {
     };
     
     mockUsers.push(newUser);
-    toast.success("Registration successful");
+    
+    // Automatically log in the user after registration
+    const response: LoginResponse = {
+      access_token: `mock-token-${newUser.userId}-${Date.now()}`,
+      user_id: newUser.userId,
+      role: newUser.role
+    };
+    
+    // Save to localStorage to persist session
+    localStorage.setItem(AUTH_TOKEN_KEY, response.access_token);
   }
 
   async getCurrentUser(): Promise<User | null> {
